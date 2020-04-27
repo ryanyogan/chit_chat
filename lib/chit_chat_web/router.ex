@@ -18,8 +18,12 @@ defmodule ChitChatWeb.Router do
 
     get "/", PageController, :index
 
+    get "/login", SessionController, :new
+    get "/logout", SessionController, :delete
+
     resources "/rooms", RoomController
     resources "/users", UserController
+    resources "/sessions", SessionController, only: [:new, :create, :delete], singleton: true
   end
 
   if Mix.env() in [:dev, :test] do
